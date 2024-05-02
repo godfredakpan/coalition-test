@@ -15,6 +15,9 @@ class ProductsController extends Controller
             'quantity' => 'required|integer',
             'price' => 'required|numeric',
         ]);
+
+
+        $productData['id'] = substr(md5(microtime()), 0, 10);
     
         $productData = [
             'productName' => $request->productName,
@@ -71,4 +74,23 @@ class ProductsController extends Controller
     }
     
 
+    public function updateProduct(Request $request, $id)
+    {
+
+        $products = [];
+        if (Storage::exists('products.json')) {
+            $products = json_decode(Storage::get('products.json'), true);
+        }
+
+
+        $products[$id]['productName'] = $request->productName;
+        $products[$id]['quantity'] = $request->quantity;
+        $products[$id]['price'] = $request->price;
+
+
+        Storage::put('products.json', json_encode($products));
+
+
+        return response()->json(['message' => 'Product updated successfully']);
+    }
 }

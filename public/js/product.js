@@ -1,7 +1,23 @@
 $(document).ready(function () {
 
+    $('#productForm').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '/save-product',
+            data: $('#productForm').serialize(),
+            success: function (data) {
+
+                $('#productTable').html(data.table);
+
+                $('#totalValue').html('Total: ' + data.totalValue);
+            }
+        });
+    });
+
+    // Edit product modal
     $('.edit-btn').click(function () {
-    var productData = $(this).data('product');
+        var productData = $(this).data('product');
         $('#editProductId').val($(this).data('id'));
         $('#editProductName').val(productData.productName);
         $('#editQuantity').val(productData.quantity);
@@ -9,18 +25,23 @@ $(document).ready(function () {
         $('#editProductModal').modal('show');
     });
 
-
+    // Submit edited product form
     $('#editProductForm').submit(function (e) {
         e.preventDefault();
         var productId = $('#editProductId').val();
         var productName = $('#editProductName').val();
         var quantity = $('#editQuantity').val();
         var price = $('#editPrice').val();
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
         var formData = {
+            '_token': csrfToken,
             'productName': productName,
             'quantity': quantity,
             'price': price
         };
+
+        console.log(formData);
 
         $.ajax({
             type: 'PUT',

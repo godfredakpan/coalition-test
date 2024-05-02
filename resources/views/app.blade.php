@@ -6,6 +6,8 @@
     <meta name="description" content="Coalition Test by Godfred Akpan">
     <meta name="keywords" content="buy, sell, coalition, make a profit">
     <meta name="author" content="Godfred Akpan">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Coalition Test by Godfred Akpan</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
