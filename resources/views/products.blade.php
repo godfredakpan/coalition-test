@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+
+    <div class="alert alert-success" id="successMessage" style="display: none;" role="alert">
+        Product added/updated successfully!
+    </div>
+
+    <div class="alert alert-danger" id="errorMessage" style="display: none;" role="alert">
+        Error adding/updating product. Please try again.
+    </div>
+
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <form id="productForm">

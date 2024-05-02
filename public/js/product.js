@@ -8,9 +8,18 @@ $(document).ready(function () {
             data: $('#productForm').serialize(),
             success: function (data) {
 
+                $('#successMessage').fadeIn().delay(3000).fadeOut(); 
+                
                 $('#productTable').html(data.table);
 
                 $('#totalValue').html('Total: ' + data.totalValue);
+
+               
+
+            },
+            error: function (data) {
+                $('#errorMessage').fadeIn().delay(3000).fadeOut(); 
+                console.log('Error:', data);
             }
         });
     });
@@ -48,10 +57,15 @@ $(document).ready(function () {
             url: '/update-product/' + productId,
             data: formData,
             success: function (data) {
+                $('#successMessage').fadeIn().delay(3000).fadeOut(); 
                 location.reload();
+                
+
             },
             error: function (data) {
                 console.log('Error:', data);
+                $('#errorMessage').fadeIn().delay(3000).fadeOut(); 
+
             }
         });
     });
